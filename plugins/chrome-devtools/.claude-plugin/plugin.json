@@ -1,0 +1,10 @@
+{
+  "name": "chrome-devtools",
+  "version": "1.0.0",
+  "description": "Chrome DevTools MCP guide for browser automation with parallel agent support",
+  "author": {
+    "name": "zeul"
+  },
+  "keywords": ["chrome", "devtools", "browser", "automation", "mcp"],
+  "skills": ["./skills/"]
+}

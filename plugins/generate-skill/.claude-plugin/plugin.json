@@ -1,0 +1,10 @@
+{
+  "name": "generate-skill",
+  "version": "1.0.0",
+  "description": "Create new Claude Code skills with proper structure and best practices",
+  "author": {
+    "name": "zeul"
+  },
+  "keywords": ["skill", "generator", "create", "template"],
+  "skills": ["./skills/"]
+}

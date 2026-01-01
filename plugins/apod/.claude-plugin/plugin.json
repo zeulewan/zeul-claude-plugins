@@ -1,0 +1,10 @@
+{
+  "name": "apod",
+  "version": "1.0.0",
+  "description": "Download NASA's Astronomy Picture of the Day with metadata",
+  "author": {
+    "name": "zeul"
+  },
+  "keywords": ["nasa", "astronomy", "apod", "image", "download"],
+  "skills": ["./skills/"]
+}

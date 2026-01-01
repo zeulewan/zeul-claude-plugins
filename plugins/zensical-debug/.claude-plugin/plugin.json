@@ -1,0 +1,10 @@
+{
+  "name": "zensical-debug",
+  "version": "1.0.0",
+  "description": "Debug and visually verify zensical sites with Chrome DevTools",
+  "author": {
+    "name": "zeul"
+  },
+  "keywords": ["zensical", "mkdocs", "debug", "chrome"],
+  "skills": ["./skills/"]
+}

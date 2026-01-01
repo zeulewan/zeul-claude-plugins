@@ -1,0 +1,61 @@
+{
+  "name": "zeul-claude-plugins",
+  "owner": {
+    "name": "zeul"
+  },
+  "metadata": {
+    "description": "Personal Claude Code plugin collection with APOD downloader, custom statusline, skill generator, Chrome DevTools, and zensical development tools",
+    "version": "1.0.0",
+    "pluginRoot": "./plugins"
+  },
+  "plugins": [
+    {
+      "name": "apod",
+      "source": "apod",
+      "description": "Download NASA's Astronomy Picture of the Day with metadata",
+      "version": "1.0.0",
+      "keywords": ["nasa", "astronomy", "apod", "image", "download"],
+      "category": "utilities"
+    },
+    {
+      "name": "custom-statusline",
+      "source": "custom-statusline",
+      "description": "Comprehensive Claude Code status line with Nerd Font icons, git status, API usage tracking, and system info",
+      "version": "1.0.0",
+      "keywords": ["statusline", "status", "bar", "theme", "ui", "nerd-font"],
+      "category": "customization"
+    },
+    {
+      "name": "generate-skill",
+      "source": "generate-skill",
+      "description": "Create new Claude Code skills with proper structure and best practices",
+      "version": "1.0.0",
+      "keywords": ["skill", "generator", "create", "template"],
+      "category": "development"
+    },
+    {
+      "name": "chrome-devtools",
+      "source": "chrome-devtools",
+      "description": "Chrome DevTools MCP guide for browser automation with parallel agent support",
+      "version": "1.0.0",
+      "keywords": ["chrome", "devtools", "browser", "automation", "mcp"],
+      "category": "development"
+    },
+    {
+      "name": "zensical-debug",
+      "source": "zensical-debug",
+      "description": "Debug and visually verify zensical sites with Chrome DevTools",
+      "version": "1.0.0",
+      "keywords": ["zensical", "mkdocs", "debug", "chrome"],
+      "category": "development"
+    },
+    {
+      "name": "zensical-development",
+      "source": "zensical-development",
+      "description": "Best practices for developing zensical/Material for MkDocs static sites",
+      "version": "1.0.0",
+      "keywords": ["zensical", "mkdocs", "material", "documentation", "static-site"],
+      "category": "development"
+    }
+  ]
+}
