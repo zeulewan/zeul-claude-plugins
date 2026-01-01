@@ -20,7 +20,7 @@
       "name": "custom-statusline",
       "source": "./plugins/custom-statusline",
       "description": "Comprehensive Claude Code status line with Nerd Font icons, git status, API usage tracking, and interactive configuration",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "keywords": ["statusline", "status", "bar", "theme", "ui", "nerd-font", "configure"],
       "category": "customization"
     },

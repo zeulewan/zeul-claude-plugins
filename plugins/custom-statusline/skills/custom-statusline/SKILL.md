@@ -19,7 +19,7 @@ Run the `/custom-statusline` command to interactively configure your status line
 - **API usage (5h/7d)** - Claude API usage percentages
 - **Context % till compact** - Context window usage
 
-The command will generate a customized `~/.claude/statusline.sh` and config file.
+The command will save your preferences to `~/.claude/statusline-config.json` and configure settings to use the plugin's script.
 
 ## Features
 
@@ -42,15 +42,29 @@ The command will generate a customized `~/.claude/statusline.sh` and config file
 ### Cost & Duration
 - Total duration in minutes
 
+## How It Works
+
+- **Script**: Stays in the plugin folder at `${CLAUDE_PLUGIN_ROOT}/scripts/statusline.sh`
+- **Config**: Saved to `~/.claude/statusline-config.json` (persists across plugin updates)
+- **Settings**: Points to the plugin's script via dynamic lookup
+
 ## Manual Setup
 
 If you prefer manual setup instead of the command:
 
-### Step 1: Copy Status Line Script
+### Step 1: Create Config File
 
-```bash
-cp ${CLAUDE_PLUGIN_ROOT}/scripts/statusline.sh ~/.claude/statusline.sh
-chmod +x ~/.claude/statusline.sh
+Create `~/.claude/statusline-config.json`:
+```json
+{
+  "show_cwd": true,
+  "show_icons": true,
+  "show_git": true,
+  "show_model": true,
+  "show_duration": true,
+  "show_usage": true,
+  "show_context": true
+}
 ```
 
 ### Step 2: Update Claude Settings
@@ -60,7 +74,7 @@ Update `~/.claude/settings.json`:
 {
   "statusLine": {
     "type": "command",
-    "command": "~/.claude/statusline.sh"
+    "command": "bash -c \"$(find ~/.claude/plugins/cache/zeul-claude-plugins/custom-statusline -name statusline.sh 2>/dev/null | head -1)\""
   }
 }
 ```
@@ -68,7 +82,7 @@ Update `~/.claude/settings.json`:
 ### Step 3: Test Status Line
 
 ```bash
-echo '{}' | ~/.claude/statusline.sh
+echo '{}' | bash -c "$(find ~/.claude/plugins/cache/zeul-claude-plugins/custom-statusline -name statusline.sh | head -1)"
 ```
 
 ## Requirements
