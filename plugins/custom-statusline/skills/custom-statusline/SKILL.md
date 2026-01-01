@@ -7,7 +7,19 @@ description: Set up custom Claude Code status line with Nerd Font icons, colors,
 
 Sets up a comprehensive Claude Code status line with **Nerd Font icons only** (no emojis), ANSI colors, real-time usage tracking, git integration, and system monitoring.
 
-**IMPORTANT**: This setup uses **ONLY Nerd Font icons** - no emoji characters. All icons are from Nerd Fonts using hex escape codes.
+## Quick Start: Interactive Configuration
+
+Run the `/custom-statusline` command to interactively configure your status line. It will ask which elements you want:
+
+- **Current directory** - Working directory path
+- **Nerd Font icons** - All icons (os, git, clock, usage) - all or nothing
+- **Git branch & status** - Branch, dirty/clean, ahead/behind, stash
+- **Model name** - Current Claude model
+- **Session duration** - Time elapsed in session
+- **API usage (5h/7d)** - Claude API usage percentages
+- **Context % till compact** - Context window usage
+
+The command will generate a customized `~/.claude/statusline.sh` and config file.
 
 ## Features
 
@@ -23,29 +35,18 @@ Sets up a comprehensive Claude Code status line with **Nerd Font icons only** (n
 - Color-coded thresholds (green <50%, yellow 50-80%, red >80%)
 - Cached for 60 seconds to avoid API spam
 
-### Token Display
-- Input/output tokens for current turn
-- **Cache read tokens** shown separately (10x cheaper!)
+### Context Display
 - Session context window percentage
-
-### Project Context
-- Python version when in Python project
-- Node version when in Node project
-- Running Docker containers
-
-### System Info
-- Battery level with color coding
-- WiFi network name
+- Color-coded by usage level
 
 ### Cost & Duration
-- Session cost in USD
 - Total duration in minutes
 
-## Workflow
+## Manual Setup
+
+If you prefer manual setup instead of the command:
 
 ### Step 1: Copy Status Line Script
-
-Copy the statusline.sh script from this plugin to your Claude config:
 
 ```bash
 cp ${CLAUDE_PLUGIN_ROOT}/scripts/statusline.sh ~/.claude/statusline.sh
@@ -70,8 +71,6 @@ Update `~/.claude/settings.json`:
 echo '{}' | ~/.claude/statusline.sh
 ```
 
-Expected output should show colors and icons properly.
-
 ## Requirements
 
 ### Essential
@@ -82,18 +81,18 @@ Expected output should show colors and icons properly.
 
 ### Platform-Specific (macOS)
 - **security** - Keychain access for API token
-- **pmset** - Battery info
-- **networksetup** - WiFi info
 
 ## Troubleshooting
 
 **Icons not showing**: Install a Nerd Font and configure your terminal to use it
 
-**No git branch**: Script shows "no-git" in gray when not in a git repository
+**No git branch**: Script shows nothing when not in a git repository
 
-**Usage shows "--"**: API call failed. Check:
+**Usage shows 0%**: API call failed. Check:
 - Keychain has "Claude Code-credentials"
 - Internet connection active
 - API endpoint accessible
 
 **Slow status line**: Increase `cache_max_age` in the script to reduce API calls
+
+**Reconfigure**: Run `/custom-statusline` again to change your preferences

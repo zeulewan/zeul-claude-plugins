@@ -1,10 +1,11 @@
 {
   "name": "custom-statusline",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Comprehensive Claude Code status line with Nerd Font icons, git status, API usage tracking, and system info",
   "author": {
     "name": "zeul"
   },
   "keywords": ["statusline", "status", "bar", "theme", "ui", "nerd-font"],
-  "skills": ["./skills/"]
+  "skills": ["./skills/"],
+  "commands": ["./commands/"]
 }
