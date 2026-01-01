@@ -5,13 +5,12 @@
   },
   "metadata": {
     "description": "Personal Claude Code plugin collection with APOD downloader, custom statusline, skill generator, Chrome DevTools, and zensical development tools",
-    "version": "1.0.0",
-    "pluginRoot": "./plugins"
+    "version": "1.0.0"
   },
   "plugins": [
     {
       "name": "apod",
-      "source": "apod",
+      "source": "./plugins/apod",
       "description": "Download NASA's Astronomy Picture of the Day with metadata",
       "version": "1.0.0",
       "keywords": ["nasa", "astronomy", "apod", "image", "download"],
@@ -19,7 +18,7 @@
     },
     {
       "name": "custom-statusline",
-      "source": "custom-statusline",
+      "source": "./plugins/custom-statusline",
       "description": "Comprehensive Claude Code status line with Nerd Font icons, git status, API usage tracking, and system info",
       "version": "1.0.0",
       "keywords": ["statusline", "status", "bar", "theme", "ui", "nerd-font"],
@@ -27,7 +26,7 @@
     },
     {
       "name": "generate-skill",
-      "source": "generate-skill",
+      "source": "./plugins/generate-skill",
       "description": "Create new Claude Code skills with proper structure and best practices",
       "version": "1.0.0",
       "keywords": ["skill", "generator", "create", "template"],
@@ -35,7 +34,7 @@
     },
     {
       "name": "chrome-devtools",
-      "source": "chrome-devtools",
+      "source": "./plugins/chrome-devtools",
       "description": "Chrome DevTools MCP guide for browser automation with parallel agent support",
       "version": "1.0.0",
       "keywords": ["chrome", "devtools", "browser", "automation", "mcp"],
@@ -43,7 +42,7 @@
     },
     {
       "name": "zensical-debug",
-      "source": "zensical-debug",
+      "source": "./plugins/zensical-debug",
       "description": "Debug and visually verify zensical sites with Chrome DevTools",
       "version": "1.0.0",
       "keywords": ["zensical", "mkdocs", "debug", "chrome"],
@@ -51,7 +50,7 @@
     },
     {
       "name": "zensical-development",
-      "source": "zensical-development",
+      "source": "./plugins/zensical-development",
       "description": "Best practices for developing zensical/Material for MkDocs static sites",
       "version": "1.0.0",
       "keywords": ["zensical", "mkdocs", "material", "documentation", "static-site"],
