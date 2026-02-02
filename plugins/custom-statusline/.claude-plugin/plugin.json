@@ -1,7 +1,7 @@
 {
   "name": "custom-statusline",
-  "version": "1.2.0",
-  "description": "Comprehensive Claude Code status line with Nerd Font icons, git status, API usage tracking, and system info",
+  "version": "1.3.0",
+  "description": "Comprehensive Claude Code status line with Nerd Font icons, git status, API usage tracking, context progress bar, and system info",
   "author": {
     "name": "zeul"
   },

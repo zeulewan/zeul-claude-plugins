@@ -36,8 +36,13 @@ The command will save your preferences to `~/.claude/statusline-config.json` and
 - Cached for 60 seconds to avoid API spam
 
 ### Context Display
-- Session context window percentage
-- Color-coded by usage level
+- Session context window percentage with **visual progress bar**
+- Uses Claude Code's pre-calculated `used_percentage` for accuracy
+- Color-coded thresholds matching community best practices:
+  - **Green** (<50%): Safe zone
+  - **Yellow** (50-80%): Approaching limit
+  - **Red** (>80%): Near auto-compact trigger
+- Example: `ctx:45% ▓▓▓▓░░░░░░`
 
 ### Cost & Duration
 - Total duration in minutes
@@ -84,6 +89,24 @@ Update `~/.claude/settings.json`:
 ```bash
 echo '{}' | bash -c "$(find ~/.claude/plugins/cache/zeul-claude-plugins/custom-statusline -name statusline.sh | head -1)"
 ```
+
+## Best Practices
+
+This plugin follows community-recommended best practices for Claude Code statuslines:
+
+### Why Context Tracking Matters
+Claude Code has a 200K token context window and automatically runs `/compact` at ~80% usage. Without visibility, you won't know you're approaching the limit until context is lost.
+
+### Design Principles
+- **Keep it scannable** - Glance and get info in under a second
+- **Use pre-calculated values** - `used_percentage` from Claude Code is more accurate than manual token math
+- **Color-code thresholds** - 50%/80% boundaries match when to pay attention vs take action
+- **Cache API calls** - 60-second cache prevents rate limiting and improves performance
+
+### References
+- [Creating The Perfect Claude Code Status Line](https://www.aihero.dev/creating-the-perfect-claude-code-status-line)
+- [Custom Claude Code Statusline: Track Context](https://1ar.io/p/custom-claude-code-statusline-track-context-and-current-directory/)
+- [How to Customize Your Claude Code Status Line](https://alexop.dev/posts/customize_claude_code_status_line/)
 
 ## Requirements
 

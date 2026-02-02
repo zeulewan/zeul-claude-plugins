@@ -92,18 +92,12 @@ if [ "$show_model" = "true" ]; then
   model=$(echo "$input" | jq -r '.model.display_name // .model.id // ""' | sed 's/Claude //' | sed 's/ /-/g')
 fi
 
-# Context usage
+# Context usage - use pre-calculated used_percentage for accuracy
+# Manual calculation can be inaccurate; Claude Code provides this value directly
+# See: https://1ar.io/p/custom-claude-code-statusline-track-context-and-current-directory/
 context_pct=0
 if [ "$show_context" = "true" ]; then
-  cache_read=$(echo "$input" | jq -r '.context_window.current_usage.cache_read_input_tokens // 0')
-  cache_create=$(echo "$input" | jq -r '.context_window.current_usage.cache_creation_input_tokens // 0')
-  cur_in=$(echo "$input" | jq -r '.context_window.current_usage.input_tokens // 0')
-  cur_out=$(echo "$input" | jq -r '.context_window.current_usage.output_tokens // 0')
-  context_max=$(echo "$input" | jq -r '.context_window.context_window_size // 200000')
-  context_used=$((cache_read + cache_create + cur_in + cur_out))
-  if [ "$context_max" -gt 0 ] 2>/dev/null; then
-    context_pct=$((context_used * 100 / context_max))
-  fi
+  context_pct=$(echo "$input" | jq -r '.context_window.used_percentage // 0' | cut -d. -f1)
 fi
 
 # Session duration
@@ -219,16 +213,33 @@ if [ "$show_usage" = "true" ]; then
   first_segment=false
 fi
 
-# Context
+# Context with progress bar
+# Color thresholds: green <50%, yellow 50-80%, red >80% (auto-compact triggers at ~80%)
 if [ "$show_context" = "true" ]; then
   [ "$first_segment" = false ] && printf '  \033[0;90m│\033[0m  '
+
+  # Build 10-char progress bar
+  bar_width=10
+  filled=$((context_pct * bar_width / 100))
+  [ "$filled" -gt "$bar_width" ] && filled=$bar_width
+  empty=$((bar_width - filled))
+
+  # Color based on threshold
   if [ "$context_pct" -ge 80 ] 2>/dev/null; then
-    printf '\033[0;31m\033[1mctx:%d%%\033[0m' "$context_pct"
+    color='\033[0;31m\033[1m'  # bold red
   elif [ "$context_pct" -ge 50 ] 2>/dev/null; then
-    printf '\033[0;33mctx:%d%%\033[0m' "$context_pct"
+    color='\033[0;33m'  # yellow
   else
-    printf '\033[0;32mctx:%d%%\033[0m' "$context_pct"
+    color='\033[0;32m'  # green
   fi
+
+  # Print: ctx:45% ▓▓▓▓░░░░░░
+  printf "${color}ctx:%d%%\033[0m " "$context_pct"
+  printf "${color}"
+  for ((i=0; i<filled; i++)); do printf '▓'; done
+  printf '\033[0;90m'
+  for ((i=0; i<empty; i++)); do printf '░'; done
+  printf '\033[0m'
 fi
 
 printf '   '
