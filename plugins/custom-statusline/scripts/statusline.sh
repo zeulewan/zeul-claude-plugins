@@ -5,13 +5,13 @@ input=$(cat)
 # Load config from ~/.claude (persists across plugin updates)
 config_file="$HOME/.claude/statusline-config.json"
 if [ -f "$config_file" ]; then
-  show_cwd=$(jq -r '.show_cwd // true' "$config_file")
-  show_icons=$(jq -r '.show_icons // true' "$config_file")
-  show_git=$(jq -r '.show_git // true' "$config_file")
-  show_model=$(jq -r '.show_model // true' "$config_file")
-  show_duration=$(jq -r '.show_duration // true' "$config_file")
-  show_usage=$(jq -r '.show_usage // true' "$config_file")
-  show_context=$(jq -r '.show_context // true' "$config_file")
+  show_cwd=$(jq -r 'if has("show_cwd") then .show_cwd else true end' "$config_file")
+  show_icons=$(jq -r 'if has("show_icons") then .show_icons else true end' "$config_file")
+  show_git=$(jq -r 'if has("show_git") then .show_git else true end' "$config_file")
+  show_model=$(jq -r 'if has("show_model") then .show_model else true end' "$config_file")
+  show_duration=$(jq -r 'if has("show_duration") then .show_duration else true end' "$config_file")
+  show_usage=$(jq -r 'if has("show_usage") then .show_usage else true end' "$config_file")
+  show_context=$(jq -r 'if has("show_context") then .show_context else true end' "$config_file")
 else
   show_cwd=true
   show_icons=true
@@ -37,7 +37,12 @@ fi
 
 # Icons (only if enabled)
 if [ "$show_icons" = "true" ]; then
-  os_icon=$(printf '\xef\xa3\xbf')
+  custom_os_icon=$(jq -r '.os_icon // ""' "$config_file" 2>/dev/null)
+  if [ -n "$custom_os_icon" ]; then
+    os_icon="$custom_os_icon"
+  else
+    os_icon=$(printf '\xef\xa3\xbf')
+  fi
   git_icon=$(printf '\xee\x82\xa0')
   clock_icon=$(printf '\xef\x80\x97')
   usage_icon=$(printf '\xef\x82\xa0')
